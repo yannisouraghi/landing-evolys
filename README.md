@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Evolys - Landing Page
 
-## Getting Started
+Site web pour Evolys, expert en investissement immobilier et mandataire à Rouen.
 
-First, run the development server:
+## 🚀 Technologies utilisées
+
+- **Next.js 16** - Framework React avec App Router
+- **TypeScript** - Typage statique
+- **Tailwind CSS v4** - Framework CSS utility-first
+- **Framer Motion** - Animations fluides et professionnelles
+- **React Icons** - Bibliothèque d'icônes
+
+## 📦 Installation
+
+```bash
+npm install
+```
+
+## 🛠️ Développement
+
+Lancer le serveur de développement :
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Créer une version de production :
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Lancer la version de production :
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Structure du projet
 
-## Deploy on Vercel
+```
+landing-evolys/
+├── app/
+│   ├── globals.css          # Styles globaux et configuration Tailwind
+│   ├── layout.tsx            # Layout principal
+│   └── page.tsx              # Page d'accueil
+├── components/
+│   ├── sections/             # Composants de sections
+│   │   ├── Navigation.tsx
+│   │   ├── Hero.tsx
+│   │   ├── StatsBand.tsx
+│   │   ├── Services.tsx
+│   │   ├── Process.tsx
+│   │   ├── Journey.tsx
+│   │   ├── Founders.tsx
+│   │   ├── Investment.tsx
+│   │   ├── Testimonials.tsx
+│   │   ├── CTA.tsx
+│   │   └── Footer.tsx
+│   └── ui/                   # Composants UI réutilisables
+│       └── Logo.tsx
+├── lib/
+│   └── utils.ts              # Utilitaires (cn helper)
+└── public/                   # Assets statiques
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Palette de couleurs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Bleu principal** : `#00B4D8`
+- **Bleu clair** : `#48CAE4`
+- **Bleu foncé** : `#0077B6`
+- **Bleu très foncé** : `#023E8A`
+- **Accent** : `#90E0EF`
+- **Sombre** : `#0A0A0A`
+- **Gris** : `#6b7280`
+
+## ✨ Fonctionnalités
+
+- ✅ Design moderne et responsive
+- ✅ Animations fluides avec Framer Motion
+- ✅ Navigation sticky avec effet de scroll
+- ✅ Sections optimisées pour la conversion
+- ✅ Composants réutilisables et maintenables
+- ✅ Performance optimisée avec Next.js
+- ✅ SEO-friendly
+
+## 📝 Sections principales
+
+1. **Hero** - Section d'accueil avec CTA
+2. **Stats Band** - Statistiques clés
+3. **Services** - Grille de services offerts
+4. **Process** - Méthodologie en 4 étapes
+5. **Journey** - Timeline verticale de l'entreprise
+6. **Founders** - Présentation des fondateurs
+7. **Investment** - Section investissement
+8. **Testimonials** - Témoignages clients
+9. **CTA** - Call-to-action avec informations de contact
+10. **Footer** - Pied de page complet
+
+## 🔧 Personnalisation
+
+Pour modifier les couleurs, éditez `app/globals.css` et les variables CSS personnalisées.
+
+Pour ajouter de nouvelles sections, créez un composant dans `components/sections/` et importez-le dans `app/page.tsx`.
+
+## 📄 Licence
+
+Ce projet est destiné à un usage commercial pour Evolys.

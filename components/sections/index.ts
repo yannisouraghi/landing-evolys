@@ -1,0 +1,11 @@
+export { Navigation } from './Navigation';
+export { Hero } from './Hero';
+export { StatsBand } from './StatsBand';
+export { Services } from './Services';
+export { Process } from './Process';
+export { Journey } from './Journey';
+export { Founders } from './Founders';
+export { Investment } from './Investment';
+export { Testimonials } from './Testimonials';
+export { CTA } from './CTA';
+export { Footer } from './Footer';
