@@ -65,10 +65,6 @@ export function Founders() {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className="group relative bg-white rounded-3xl p-12 shadow-[0_10px_40px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.1)] transition-all duration-500 hover:-translate-y-2 overflow-hidden"
             >
-              {/* Floating shapes */}
-              <div className="absolute w-20 h-20 bg-evolys-blue opacity-10 rounded-full -top-5 -right-5 animate-[float_6s_ease-in-out_infinite]" />
-              <div className="absolute w-15 h-15 bg-evolys-blue-light opacity-10 rounded-full -bottom-5 -left-5 animate-[float_8s_ease-in-out_infinite_reverse]" />
-
               {/* Avatar */}
               <div className="relative w-[200px] h-[200px] mx-auto mb-8">
                 <div className="w-full h-full rounded-full relative overflow-hidden border-4 border-evolys-blue/20">
