@@ -18,7 +18,7 @@ export function Hero() {
         >
           {/* Subtitle */}
           <div className="mb-[1vh] sm:mb-[0.2vh]">
-            <p className="text-[clamp(11px,1.9vh,28px)] font-light text-gray-600 tracking-wide leading-tight px-2">
+            <p className="text-[10px] sm:text-[clamp(11px,1.9vh,28px)] font-light text-gray-600 tracking-wide leading-tight px-2">
               ( Si vous avez une entreprise de{' '}
               <span className="font-semibold text-evolys-blue">conciergerie</span>
               {' '}ou de{' '}
@@ -84,7 +84,7 @@ export function Hero() {
               href="https://calendly.com/d/cwv3-jv5-bmj/developper-sa-conciergerie-grace-a-la-transaction"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative overflow-hidden bg-gradient-to-r from-evolys-blue to-evolys-blue-dark text-white px-[clamp(16px,2.8vw,60px)] py-[clamp(8px,1.4vh,26px)] rounded-full font-bold text-[clamp(12px,1.9vh,28px)] shadow-[0_10px_30px_rgba(0,180,216,0.3)] hover:scale-105 hover:-translate-y-1 transition-all duration-300"
+              className="relative overflow-hidden bg-gradient-to-r from-evolys-blue to-evolys-blue-dark text-white px-[clamp(16px,2.8vw,60px)] py-[clamp(8px,1.4vh,26px)] rounded-full font-bold text-[clamp(12px,1.9vh,28px)] shadow-[0_10px_30px_rgba(0,180,216,0.3)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 mb-4 sm:mb-0"
             >
               <span className="relative flex items-center gap-[clamp(4px,0.5vw,14px)]">
                 <svg
