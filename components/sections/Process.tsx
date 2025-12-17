@@ -29,7 +29,7 @@ export function Process() {
             className="w-full lg:w-auto space-y-4"
           >
             {/* Video Badge with Arrow */}
-            <div className="flex justify-end items-center">
+            <div className="hidden sm:flex justify-end items-center">
               <div className="bg-evolys-blue text-white px-3 py-1.5 rounded-lg font-bold text-sm shadow-md">
                 Vidéo
               </div>
