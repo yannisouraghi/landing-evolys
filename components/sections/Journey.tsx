@@ -52,7 +52,7 @@ function ringSectorPath(
   ].join(" ");
 }
 
-// Arc de progression autour d'un segment
+// Arc de progression autour d'un segment (sens anti-horaire)
 function progressArcPath(
   cx: number,
   cy: number,
@@ -61,12 +61,13 @@ function progressArcPath(
   endDeg: number,
   progress: number
 ) {
-  const actualEnd = startDeg + (endDeg - startDeg) * progress;
+  // Sens anti-horaire : on part de end et on va vers start
+  const actualStart = endDeg - (endDeg - startDeg) * progress;
   if (progress <= 0) return "";
 
-  const start = polarToCartesian(cx, cy, r, startDeg);
-  const end = polarToCartesian(cx, cy, r, actualEnd);
-  const sweep = actualEnd - startDeg;
+  const start = polarToCartesian(cx, cy, r, actualStart);
+  const end = polarToCartesian(cx, cy, r, endDeg);
+  const sweep = endDeg - actualStart;
   const largeArc = sweep > 180 ? 1 : 0;
 
   return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} 1 ${end.x} ${end.y}`;
@@ -148,13 +149,21 @@ function CycleFocus({
   const [active, setActive] = useState<SegmentKey>("recherche");
   const [isHovering, setIsHovering] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [cycleKey, setCycleKey] = useState(0);
 
   // Ordre de défilement : sens anti-horaire (Recherche → Transaction → Conciergerie → Vente)
   const cycleOrder: SegmentKey[] = ["recherche", "transaction", "conciergerie", "vente"];
   const activeSeg = segments.find((s) => s.key === active)!;
   const activeIndex = cycleOrder.indexOf(active);
 
-  // Animation de la barre de progression
+  // Fonction pour changer de segment manuellement
+  const handleSegmentClick = (key: SegmentKey) => {
+    setActive(key);
+    setProgress(0);
+    setCycleKey(prev => prev + 1);
+  };
+
+  // Animation de la barre de progression et changement automatique
   useEffect(() => {
     if (!autoCycle || isHovering) {
       return;
@@ -162,34 +171,28 @@ function CycleFocus({
 
     setProgress(0);
     const startTime = Date.now();
+    let frameId: number;
+
     const animationFrame = () => {
       const elapsed = Date.now() - startTime;
       const newProgress = Math.min(elapsed / cycleMs, 1);
       setProgress(newProgress);
 
       if (newProgress < 1) {
-        requestAnimationFrame(animationFrame);
+        frameId = requestAnimationFrame(animationFrame);
+      } else {
+        // Passer au segment suivant
+        setActive((prev) => {
+          const idx = cycleOrder.indexOf(prev);
+          const next = cycleOrder[(idx + 1) % cycleOrder.length];
+          return next;
+        });
       }
     };
 
-    const frameId = requestAnimationFrame(animationFrame);
+    frameId = requestAnimationFrame(animationFrame);
     return () => cancelAnimationFrame(frameId);
-  }, [active, autoCycle, cycleMs, isHovering]);
-
-  // Changement de segment
-  useEffect(() => {
-    if (!autoCycle || isHovering) return;
-
-    const id = window.setInterval(() => {
-      setActive((prev) => {
-        const idx = cycleOrder.indexOf(prev);
-        const next = cycleOrder[(idx + 1) % cycleOrder.length];
-        return next;
-      });
-    }, cycleMs);
-
-    return () => window.clearInterval(id);
-  }, [autoCycle, cycleMs, isHovering]);
+  }, [active, autoCycle, cycleMs, isHovering, cycleKey]);
 
   const pad = gapDeg / 2;
   const iconRadius = rInner + (rOuter - rInner) * 0.5;
@@ -246,8 +249,8 @@ function CycleFocus({
                 return (
                   <motion.g
                     key={s.key}
-                    onMouseEnter={() => setActive(s.key)}
-                    onClick={() => setActive(s.key)}
+                    onMouseEnter={() => handleSegmentClick(s.key)}
+                    onClick={() => handleSegmentClick(s.key)}
                     style={{ cursor: "pointer", transformOrigin: `${cx}px ${cy}px` }}
                     animate={{ scale: isActive ? 1.08 : 1 }}
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
@@ -262,10 +265,10 @@ function CycleFocus({
                     {/* Barre de progression autour du segment actif */}
                     {isActive && !isHovering && (
                       <path
-                        d={progressArcPath(cx, cy, rOuter + 8, s.start + pad, s.end - pad, progress)}
+                        d={progressArcPath(cx, cy, rOuter + 4, s.start + pad, s.end - pad, progress)}
                         fill="none"
                         stroke="url(#segmentGradient)"
-                        strokeWidth="4"
+                        strokeWidth="2"
                         strokeLinecap="round"
                       />
                     )}
@@ -322,7 +325,7 @@ function CycleFocus({
           return (
             <button
               key={key}
-              onClick={() => setActive(key)}
+              onClick={() => handleSegmentClick(key)}
               className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 ${
                 active === key
                   ? "bg-gradient-to-r from-evolys-blue to-evolys-blue-dark text-white shadow-md"
@@ -366,7 +369,7 @@ function CycleFocus({
               {cycleOrder.map((key, index) => (
                 <button
                   key={key}
-                  onClick={() => setActive(key)}
+                  onClick={() => handleSegmentClick(key)}
                   className={`h-1.5 rounded-full transition-all duration-500 ${
                     activeIndex === index
                       ? "w-8 bg-gradient-to-r from-evolys-blue to-evolys-blue-dark"
