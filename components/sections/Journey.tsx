@@ -52,6 +52,26 @@ function ringSectorPath(
   ].join(" ");
 }
 
+// Arc de progression autour d'un segment
+function progressArcPath(
+  cx: number,
+  cy: number,
+  r: number,
+  startDeg: number,
+  endDeg: number,
+  progress: number
+) {
+  const actualEnd = startDeg + (endDeg - startDeg) * progress;
+  if (progress <= 0) return "";
+
+  const start = polarToCartesian(cx, cy, r, startDeg);
+  const end = polarToCartesian(cx, cy, r, actualEnd);
+  const sweep = actualEnd - startDeg;
+  const largeArc = sweep > 180 ? 1 : 0;
+
+  return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} 1 ${end.x} ${end.y}`;
+}
+
 function CycleFocus({
   size: propSize = 340,
   autoCycle = true,
@@ -127,12 +147,36 @@ function CycleFocus({
 
   const [active, setActive] = useState<SegmentKey>("recherche");
   const [isHovering, setIsHovering] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   // Ordre de défilement : sens anti-horaire (Recherche → Transaction → Conciergerie → Vente)
   const cycleOrder: SegmentKey[] = ["recherche", "transaction", "conciergerie", "vente"];
   const activeSeg = segments.find((s) => s.key === active)!;
   const activeIndex = cycleOrder.indexOf(active);
 
+  // Animation de la barre de progression
+  useEffect(() => {
+    if (!autoCycle || isHovering) {
+      return;
+    }
+
+    setProgress(0);
+    const startTime = Date.now();
+    const animationFrame = () => {
+      const elapsed = Date.now() - startTime;
+      const newProgress = Math.min(elapsed / cycleMs, 1);
+      setProgress(newProgress);
+
+      if (newProgress < 1) {
+        requestAnimationFrame(animationFrame);
+      }
+    };
+
+    const frameId = requestAnimationFrame(animationFrame);
+    return () => cancelAnimationFrame(frameId);
+  }, [active, autoCycle, cycleMs, isHovering]);
+
+  // Changement de segment
   useEffect(() => {
     if (!autoCycle || isHovering) return;
 
@@ -215,6 +259,16 @@ function CycleFocus({
                       transition={{ duration: 0.3 }}
                       filter={isActive ? "url(#softShadow)" : "none"}
                     />
+                    {/* Barre de progression autour du segment actif */}
+                    {isActive && !isHovering && (
+                      <path
+                        d={progressArcPath(cx, cy, rOuter + 8, s.start + pad, s.end - pad, progress)}
+                        fill="none"
+                        stroke="url(#segmentGradient)"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                      />
+                    )}
                     {/* Icon background circle */}
                     <circle
                       cx={iconPos.x}
