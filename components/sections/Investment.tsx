@@ -23,20 +23,20 @@ const features = [
 
 export function Investment() {
   return (
-    <section id="investment" className="py-24 relative bg-gradient-to-br from-white via-blue-50/20 to-slate-50 overflow-hidden">
+    <section id="investment" className="py-12 sm:py-16 md:py-24 relative bg-gradient-to-br from-white via-blue-50/20 to-slate-50 overflow-hidden">
       {/* Subtle decorative elements */}
       <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-evolys-blue/20 to-transparent" />
       <div className="absolute top-20 right-[-5%] w-96 h-96 bg-evolys-blue/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-[-5%] w-72 h-72 bg-evolys-accent/5 rounded-full blur-3xl" />
 
-      <div className="max-w-[1200px] mx-auto px-8 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16"
         >
           <span className="inline-block bg-evolys-blue text-white px-4 py-2 rounded-full text-sm font-semibold tracking-wide mb-4">
             INVESTIR AVEC EVOLYS
@@ -44,13 +44,13 @@ export function Investment() {
           <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold mb-6 tracking-tight">
             L'investissement immobilier réinventé
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
             Bénéficiez de notre expertise pour construire un patrimoine solide et rentable
           </p>
         </motion.div>
 
         {/* Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-20 items-center mt-16">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center mt-8 sm:mt-12 md:mt-16">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -58,15 +58,15 @@ export function Investment() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-4xl font-bold mb-6 leading-tight">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 leading-tight">
               Maximisez votre retour sur investissement
             </h3>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">
               Notre approche data-driven et notre connaissance approfondie du marché
               rouennais vous garantissent les meilleures opportunités d'investissement.
             </p>
 
-            <ul className="space-y-6 mb-8">
+            <ul className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
               {features.map((feature, index) => (
                 <motion.li
                   key={index}
@@ -89,7 +89,7 @@ export function Investment() {
 
             <a
               href="#contact"
-              className="inline-block bg-gradient-to-r from-evolys-blue to-evolys-blue-dark text-white px-10 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_15px_30px_rgba(0,180,216,0.3)]"
+              className="inline-block bg-gradient-to-r from-evolys-blue to-evolys-blue-dark text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_15px_30px_rgba(0,180,216,0.3)]"
             >
               Contactez-nous
             </a>

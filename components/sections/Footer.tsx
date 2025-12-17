@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -23,12 +24,12 @@ export function Footer() {
           {/* Copyright & Legal */}
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-white/70">
             <p>&copy; {currentYear} Evolys. Tous droits réservés.</p>
-            <a
-              href="#"
+            <Link
+              href="/mentions-legales"
               className="hover:text-evolys-blue transition-colors duration-300"
             >
               Mentions légales
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ export function Hero() {
           </div>
 
           <div className="mt-[2.5vh]">
-            <h1 className="text-[clamp(18px,4vh,52px)] font-black leading-[1.1] mb-[0.2vh] tracking-tight whitespace-nowrap">
+            <h1 className="text-[clamp(16px,4vh,52px)] font-black leading-[1.1] mb-[0.2vh] tracking-tight sm:whitespace-nowrap">
               Découvrez en{' '}
               <span className="bg-gradient-to-r from-evolys-blue via-evolys-blue-dark to-evolys-blue bg-clip-text text-transparent">
                 2 minutes
@@ -100,7 +100,7 @@ export function Hero() {
             </a>
 
             {/* Title for next section */}
-            <p className="text-[clamp(16px,3.5vh,46px)] font-black text-dark whitespace-nowrap mt-[1vh]">
+            <p className="text-[clamp(14px,3.5vh,46px)] font-black text-dark sm:whitespace-nowrap mt-[1vh]">
               Concrètement, voici ce que{' '}
               <span className="text-evolys-blue">vous pourrez proposer</span>{' '}
               à vos clients :
