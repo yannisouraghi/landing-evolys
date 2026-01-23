@@ -1,8 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState, useRef } from 'react';
 
 export function Hero() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+    videoRef.current?.play();
+  };
+
   return (
     <section className="relative pt-[2vh] pb-[0.5vh] h-screen flex items-center bg-gradient-to-br from-white via-blue-50/30 to-white overflow-hidden">
       {/* Simple background pattern */}
@@ -64,12 +73,55 @@ export function Hero() {
 
             {/* Video Container */}
             <div className="relative w-full aspect-[16/9] bg-gradient-to-br from-dark to-dark-light rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)]">
-              <div className="absolute inset-0 bg-gradient-to-br from-evolys-blue/10 to-transparent flex items-center justify-center">
-                {/* Play Button */}
-                <div className="w-[clamp(50px,9.5vh,145px)] h-[clamp(50px,9.5vh,145px)] bg-white rounded-full flex items-center justify-center cursor-pointer shadow-[0_10px_30px_rgba(0,180,216,0.3)] hover:scale-110 transition-transform duration-300">
-                  <div className="w-0 h-0 border-l-[clamp(18px,3.5vh,58px)] border-l-evolys-blue border-t-[clamp(11px,2.1vh,35px)] border-t-transparent border-b-[clamp(11px,2.1vh,35px)] border-b-transparent ml-2" />
+              <video
+                ref={videoRef}
+                className={`w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
+                controls={isPlaying}
+                playsInline
+                preload="none"
+                onEnded={() => setIsPlaying(false)}
+              >
+                <source src="/main_video.mp4" type="video/mp4" />
+                Votre navigateur ne supporte pas la lecture vidéo.
+              </video>
+
+              {/* Overlay with Play Button */}
+              {!isPlaying && (
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center cursor-pointer group overflow-hidden"
+                  onClick={handlePlay}
+                >
+                  {/* Background orbs */}
+                  <div className="absolute top-[-30%] left-[-20%] w-[60%] h-[60%] bg-evolys-blue/15 rounded-full blur-[60px]" />
+                  <div className="absolute bottom-[-30%] right-[-20%] w-[60%] h-[60%] bg-cyan-400/15 rounded-full blur-[60px]" />
+
+                  {/* Dot pattern */}
+                  <div className="absolute inset-0 bg-[radial-gradient(#00B4D8_1px,transparent_1px)] bg-[length:24px_24px] opacity-[0.08]" />
+
+                  {/* Animated rings */}
+                  <div className="absolute w-[clamp(80px,15vh,220px)] h-[clamp(80px,15vh,220px)] rounded-full border-2 border-evolys-blue/20 animate-ping" style={{ animationDuration: '2s' }} />
+                  <div className="absolute w-[clamp(100px,18vh,260px)] h-[clamp(100px,18vh,260px)] rounded-full border border-evolys-blue/10" />
+
+                  {/* Play Button with gradient border */}
+                  <div className="relative">
+                    {/* Rotating gradient border */}
+                    <div className="absolute -inset-[3px] rounded-full overflow-hidden">
+                      <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,#00B4D8,#22D3EE,#0077B6,#00B4D8)] animate-spin" style={{ animationDuration: '3s' }} />
+                    </div>
+                    {/* Glow effect */}
+                    <div className="absolute -inset-4 bg-evolys-blue/25 rounded-full blur-xl group-hover:bg-evolys-blue/35 transition-all duration-300" />
+                    {/* Button */}
+                    <div className="relative w-[clamp(60px,11vh,160px)] h-[clamp(60px,11vh,160px)] bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,180,216,0.3)] group-hover:scale-110 transition-all duration-300">
+                      <div className="w-0 h-0 border-l-[clamp(20px,4vh,65px)] border-l-evolys-blue border-t-[clamp(12px,2.4vh,40px)] border-t-transparent border-b-[clamp(12px,2.4vh,40px)] border-b-transparent ml-2" />
+                    </div>
+                  </div>
+
+                  {/* Text under button */}
+                  <p className="absolute bottom-[12%] text-gray-600 text-[clamp(10px,1.5vh,18px)] font-medium tracking-wider uppercase">
+                    Cliquez pour lancer la vidéo
+                  </p>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
