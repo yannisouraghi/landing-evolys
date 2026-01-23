@@ -81,7 +81,7 @@ export function Hero() {
                 preload="none"
                 onEnded={() => setIsPlaying(false)}
               >
-                <source src="/main_video.mp4" type="video/mp4" />
+                <source src="https://drive.google.com/uc?export=download&id=1pn_8BJpqRHbMfwAKVQ04Z2d7Bm7jNTbS" type="video/mp4" />
                 Votre navigateur ne supporte pas la lecture vidéo.
               </video>
 
