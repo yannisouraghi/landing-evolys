@@ -78,7 +78,8 @@ export function Hero() {
                 className="w-full h-full object-cover"
                 controls={isPlaying}
                 playsInline
-                preload="metadata"
+                preload="none"
+                poster="/video_bg.png"
                 onEnded={() => setIsPlaying(false)}
               >
                 <source src="/main_video.mp4" type="video/mp4" />
