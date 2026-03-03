@@ -2,10 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { useState, useRef } from 'react';
+import { useCalendlyLink } from '@/lib/useCalendlyLink';
 
 export function Hero() {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const calendlyLink = useCalendlyLink();
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -13,7 +15,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative pt-[2vh] pb-[0.5vh] h-screen flex items-center bg-gradient-to-br from-white via-blue-50/30 to-white overflow-hidden">
+    <section className="relative pt-[10vh] pb-[0.5vh] h-screen flex items-center bg-gradient-to-br from-white via-blue-50/30 to-white overflow-hidden">
       {/* Simple background pattern */}
       <div className="absolute top-0 right-[-10%] w-[60%] h-full opacity-[0.04] pointer-events-none bg-[repeating-linear-gradient(45deg,#00B4D8_0,#00B4D8_1px,transparent_1px,transparent_15px)]" />
 
@@ -118,7 +120,7 @@ export function Hero() {
             className="mt-[2vh] flex flex-col items-center gap-[2vh]"
           >
             <a
-              href="https://calendly.com/d/cwv3-jv5-bmj/developper-sa-conciergerie-grace-a-la-transaction"
+              href={calendlyLink}
               target="_blank"
               rel="noopener noreferrer"
               className="relative overflow-hidden bg-gradient-to-r from-evolys-blue to-evolys-blue-dark text-white px-[clamp(16px,2.8vw,60px)] py-[clamp(8px,1.4vh,26px)] rounded-full font-bold text-[clamp(12px,1.9vh,28px)] shadow-[0_10px_30px_rgba(0,180,216,0.3)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 mb-4 sm:mb-0"

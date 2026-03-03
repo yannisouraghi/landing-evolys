@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { useCalendlyLink } from '@/lib/useCalendlyLink';
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const calendlyLink = useCalendlyLink();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +50,7 @@ export function Navigation() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <a href="https://calendly.com/d/cwv3-jv5-bmj/developper-sa-conciergerie-grace-a-la-transaction" target="_blank" rel="noopener noreferrer" className="group relative">
+          <a href={calendlyLink} target="_blank" rel="noopener noreferrer" className="group relative">
             <motion.div
               className="relative overflow-hidden bg-gradient-to-r from-evolys-blue to-evolys-blue-dark text-white px-[clamp(14px,1.8vw,36px)] py-[clamp(8px,1.1vh,18px)] rounded-full font-semibold text-[clamp(12px,1.5vh,18px)] transition-all duration-300 shadow-lg"
               whileHover={{ scale: 1.05, y: -2 }}

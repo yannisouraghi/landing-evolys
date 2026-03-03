@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navigation } from '@/components/sections/Navigation';
 import { Hero } from '@/components/sections/Hero';
@@ -15,7 +15,7 @@ export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
 
   return (
-    <>
+    <Suspense>
       <AnimatePresence>
         {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       </AnimatePresence>
@@ -41,6 +41,6 @@ export default function Home() {
         </main>
         <Footer />
       </motion.div>
-    </>
+    </Suspense>
   );
 }

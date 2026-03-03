@@ -3,10 +3,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FiUsers, FiHome, FiArrowRight } from 'react-icons/fi';
+import { useCalendlyLink } from '@/lib/useCalendlyLink';
 
 export function WhyNow() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const calendlyLink = useCalendlyLink();
 
   return (
     <section ref={sectionRef} className="relative pt-10 pb-8 sm:pt-12 sm:pb-10 md:pt-14 md:pb-12 bg-gradient-to-b from-blue-50/50 via-slate-100 to-blue-50/50 overflow-hidden">
@@ -124,7 +126,7 @@ export function WhyNow() {
           className="text-center"
         >
           <a
-            href="https://calendly.com/d/cwv3-jv5-bmj/developper-sa-conciergerie-grace-a-la-transaction"
+            href={calendlyLink}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-gradient-to-r from-evolys-blue to-cyan-500 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-[0_8px_25px_rgba(0,180,216,0.3)] hover:shadow-[0_12px_35px_rgba(0,180,216,0.4)] hover:scale-105 transition-all duration-300"
