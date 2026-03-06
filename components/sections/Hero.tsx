@@ -2,12 +2,16 @@
 
 import { motion } from 'framer-motion';
 import { useState, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useCalendlyLink } from '@/lib/useCalendlyLink';
 
 export function Hero() {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const calendlyLink = useCalendlyLink();
+  const searchParams = useSearchParams();
+  const utmSource = searchParams.get('utm_source');
+  const videoSrc = utmSource === 'instagram' || utmSource === 'mail' ? '/main_video2.mp4' : '/main_video.mp4';
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -84,7 +88,7 @@ export function Hero() {
                 poster="/video_bg.png"
                 onEnded={() => setIsPlaying(false)}
               >
-                <source src="/main_video.mp4" type="video/mp4" />
+                <source src={videoSrc} type="video/mp4" />
                 Votre navigateur ne supporte pas la lecture vidéo.
               </video>
 
